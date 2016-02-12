@@ -30,8 +30,8 @@ public class DriveTrain extends Subsystem {
      * Initializes the VictorSPs.
      */
     public DriveTrain() {
-    	victorLeft = new VictorSP(RobotMap.DT_VICTORSP_L_PORT);
-    	victorRight = new VictorSP(RobotMap.DT_VICTORSP_R_PORT);
+    	victorLeft = new VictorSP(RobotMap.DriveTrain.DT_VICTORSP_L_PORT);
+    	victorRight = new VictorSP(RobotMap.DriveTrain.DT_VICTORSP_R_PORT);
     }
 
     /*
