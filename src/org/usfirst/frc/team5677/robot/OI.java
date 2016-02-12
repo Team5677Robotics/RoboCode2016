@@ -31,5 +31,9 @@ public class OI {
 		initialize();
 		return oi;
 	}
+	
+	public static GamepadWrapper getGamepad() {
+		return gamepad;
+	}
 }
 

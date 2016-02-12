@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5677.robot.subsystems;
 
 import org.usfirst.frc.team5677.robot.RobotMap;
+import org.usfirst.frc.team5677.robot.commands.ManualDriveCommand;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,7 +24,12 @@ public class DriveTrain extends Subsystem {
     // singleton instance of DriveTrain
     private static DriveTrain driveTrain;
 
+    /*
+     * Sets the default command to be manual drive, which allows the 
+     * human player to drive the robot using the joysticks.
+     */
     public void initDefaultCommand() {
+    	setDefaultCommand(new ManualDriveCommand());
     }
 
     /*
@@ -35,16 +41,21 @@ public class DriveTrain extends Subsystem {
     }
 
     /*
-     * Initializes a (singleton) instance of the drive train if none exists.
+     * Initializes a (singleton) instance of the DriveTrain if none exist.
      *
-     * @postcondition initializes singleton instance of drive train.
+     * @postcondition initializes singleton instance of DriveTrain
      */
     public static void initialize() {
-	if (driveTrain == null) {
-	    driveTrain = new DriveTrain();
-	}
+		if (driveTrain == null) {
+		    driveTrain = new DriveTrain();
+		}
     }
 
+    /* 
+     * Gets the singleton instance of DriveTrain.
+     * 
+     * @return the singleton instance of DriveTrain
+     */
     public static DriveTrain getInstance() {
     	initialize();
     	return driveTrain;
@@ -57,6 +68,9 @@ public class DriveTrain extends Subsystem {
      * @param right the speed of the right VictorSP (-1 <= left <= 1)
      */
     public void setSpeed(double left, double right) {
+    	left *= SCALE;
+    	right *= SCALE;
+    	
     	victorRight.set(left);
     	victorLeft.set(right);
     }
@@ -67,6 +81,8 @@ public class DriveTrain extends Subsystem {
      * @param speed the speed of both VictorSPs (-1 <= speed <= 1)
      */
     public void setSpeed(double speed) {
+    	speed *= SCALE;
+    	
     	victorRight.set(speed);
     	victorLeft.set(speed);
     }

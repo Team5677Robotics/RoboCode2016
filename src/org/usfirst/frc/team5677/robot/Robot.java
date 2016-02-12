@@ -15,11 +15,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
+ * 
+ * @author Vedaad Shakib
+ * @version 02/11/16
  */
 public class Robot extends IterativeRobot {
     /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
+     * Initalizes the OI and DriveTrain.
+     * 
+     * @postcondition initializes the OI and DriveTrain
      */
     public void robotInit() {
     	OI.initialize();
@@ -48,7 +52,6 @@ public class Robot extends IterativeRobot {
      * or additional comparisons to the switch structure below with additional strings & commands.
      */
     public void autonomousInit() {        
-
     }
 
     /**
@@ -59,7 +62,6 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-
     }
 
     /**
