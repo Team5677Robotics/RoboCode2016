@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * A Joystick wrapper for gamepads that include more accurate/useful names for the analogue stick axes
- * @author neymikajain
- * @author atierno
+ * @author Neymika Jain
+ * @author Andrew Tierno
  */
 public class GamepadWrapper extends Joystick {
     private final JoystickButtonWrapper buttonA;
