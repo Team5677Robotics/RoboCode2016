@@ -2,6 +2,7 @@ package org.usfirst.frc.team5677.robot.subsystems;
 
 import org.usfirst.frc.team5677.robot.RobotMap;
 import org.usfirst.frc.team5677.robot.commands.ManualDriveCommand;
+import org.usfirst.frc.team5677.robot.commands.SetSpeedCommand;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,7 +20,7 @@ public class DriveTrain extends Subsystem {
     private static VictorSP victorRight;
     
     // speed scale
-    private static final double SCALE = 1;
+    private static final double SCALE = 0.7;
 
     // singleton instance of DriveTrain
     private static DriveTrain driveTrain;
@@ -71,7 +72,7 @@ public class DriveTrain extends Subsystem {
     	left *= SCALE;
     	right *= SCALE;
     	
-    	victorRight.set(left);
+    	victorRight.set(-1*left);
     	victorLeft.set(right);
     }
     
@@ -83,8 +84,7 @@ public class DriveTrain extends Subsystem {
     public void setSpeed(double speed) {
     	speed *= SCALE;
     	
-    	victorRight.set(speed);
-    	victorLeft.set(speed);
+    	setSpeed(speed, speed);
     }
 }
 

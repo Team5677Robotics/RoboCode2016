@@ -21,12 +21,15 @@ public class ManualDriveCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	driveTrain.setSpeed(OI.getGamepad().getLeftY(), OI.getGamepad().getRightY());
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	for (int i = 0; i < 12; i++) {
+    		System.out.println(i+": "+OI.getGamepad().getRawAxis(i));
+    	}
+    	driveTrain.setSpeed(OI.getGamepad().getRawAxis(1), OI.getGamepad().getRawAxis(3));
     }
 
     // Make this return true when this Command no longer needs to run execute()
