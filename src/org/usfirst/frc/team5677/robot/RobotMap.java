@@ -34,6 +34,7 @@ public class RobotMap {
         
         public static final int CONVEYOR_VICTORSP_PORT = 0;
         public static final int CONVEYOR_PISTON_PORT = 0;
+        public static final int CONVEYOR_LIMIT_SWITCH_PORT = 0;
         
         public static final int SHOOTER_VICTORSP_PORT = 0;
         public static final int SHOOTER_ENCODER_PORT_A = 0;

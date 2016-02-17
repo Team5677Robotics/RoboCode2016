@@ -2,6 +2,7 @@ package org.usfirst.frc.team5677.robot.subsystems;
 
 import org.usfirst.frc.team5677.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -24,6 +25,7 @@ public class Manipulator extends Subsystem {
     private VictorSP conveyorVictorSP;
     // assuming it's a solenoid until further notification
     private Solenoid conveyorPiston;
+    private DigitalInput conveyorLimitSwitch;
 
     private VictorSP shooterVictorSP;
     private Encoder shooterEncoder;
@@ -38,6 +40,7 @@ public class Manipulator extends Subsystem {
 		intakeVictorSP = new VictorSP(RobotMap.Manipulator.INTAKE_VICTORSP_PORT);
 		
 		conveyorVictorSP = new VictorSP(RobotMap.Manipulator.CONVEYOR_VICTORSP_PORT);
+		conveyorLimitSwitch = new DigitalInput(RobotMap.Manipulator.CONVEYOR_LIMIT_SWITCH_PORT);
 		conveyorPiston = new Solenoid(RobotMap.Manipulator.CONVEYOR_PISTON_PORT);
 		
 		shooterVictorSP = new VictorSP(RobotMap.Manipulator.SHOOTER_VICTORSP_PORT);
@@ -97,14 +100,14 @@ public class Manipulator extends Subsystem {
      * Lowers the intake.
      */
     public void lowerIntake() {
-	intakeSolenoid.set(1);
+    	intakeSolenoid.set(true);
     }
 
     /**
      * Raises the intake.
      */
     public void raiseIntake() {
-	intakeSolenoid.set(0);
+	intakeSolenoid.set(false);
     }
 
     /**
@@ -113,7 +116,7 @@ public class Manipulator extends Subsystem {
      * @precondition intake is lowered
      */
     public void intakeBoulder() {
-	if (isIntakeLowered) intakeVictorSP.set(0.7);
+    	if (isIntakeLowered()) intakeVictorSP.set(0.7);
     }
 
     /**
@@ -121,8 +124,28 @@ public class Manipulator extends Subsystem {
      *
      * @precondition intake is lowered
      */
-    public void intakeBoulder() {
-	if (isIntakeLowered) intakeVictorSP.set(-0.7);
+    public void ejectBoulder() {
+    	if (isIntakeLowered()) intakeVictorSP.set(-0.7);
+    }
+
+    public void conveyorRaiseBoulder() {
+    	conveyorVictorSP.set(0.7);
+    }
+
+    public void conveyorLowerBoulder() {
+    	conveyorVictorSP.set(-0.7);
+    }
+
+    public boolean isConveyorHeightMax() {
+    	return conveyorLimitSwitch.get();
+    }
+
+    public void loadBoulder() {
+    	conveyorPiston.set(true);
+    }
+
+    public void resetLoader() {
+    	conveyorPiston.set(false);
     }
 }
 
