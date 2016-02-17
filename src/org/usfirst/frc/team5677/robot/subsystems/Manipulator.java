@@ -30,6 +30,9 @@ public class Manipulator extends Subsystem {
     private VictorSP shooterHorizRotVictorSP;
     private VictorSP shooterVertRotVictorSP;
 
+    /**
+     * Initializes the various motors and solenoids of the manipulator.
+     */
     public Manipulator() {
 		intakeSolenoid = new Solenoid(RobotMap.Manipulator.INTAKE_SOLENOID_PORT);
 		intakeVictorSP = new VictorSP(RobotMap.Manipulator.INTAKE_VICTORSP_PORT);
@@ -46,15 +49,64 @@ public class Manipulator extends Subsystem {
     public void initDefaultCommand() {
     }
 
+    /**
+     * If the singleton instance of Manipulator is null, initialize it.
+     */
     public static void initialize() {
 	if (manipulator == null) {
 	    manipulator = new Manipulator();
 	}
     }
 
+    /**
+     * Gets the singleton instance of Manipulator.
+     *
+     * @return the singleton instance of Manipulator.
+     */
     public static Manipulator getInstance() {
 	initialize();
 	return manipulator;
     }
+
+    /**
+     * Returns true if the intake is lowered; false otherwise.
+     *
+     * @return true if the intake is lowered; false otherwise
+     */
+    public boolean intakeIsLowered() {
+	return intakeSolenoid.get();
+    }
+
+    /**
+     * Returns false if the intake is raised; false otherwise.
+     *
+     * @return false if the intake is raised; false otherwise
+     */
+    public boolean intakeIsRaised() {
+	return !intakeSolenoid.get();
+    }
+
+    /**
+     * Toggles the state of the intake.
+     */
+    public void toggleIntake() {
+	intakeSolenoid.set(!intakeSolenoid.get());
+    }
+
+    /**
+     * Lowers the intake.
+     */
+    public void lowerIntake() {
+	intakeSolenoid.set(1);
+    }
+
+    /**
+     * Raises the intake.
+     */
+    public void raiseIntake() {
+	intakeSolenoid.set(0);
+    }
+
+    
 }
 
