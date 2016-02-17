@@ -73,7 +73,7 @@ public class Manipulator extends Subsystem {
      *
      * @return true if the intake is lowered; false otherwise
      */
-    public boolean intakeIsLowered() {
+    public boolean isIntakeLowered() {
 	return intakeSolenoid.get();
     }
 
@@ -82,7 +82,7 @@ public class Manipulator extends Subsystem {
      *
      * @return false if the intake is raised; false otherwise
      */
-    public boolean intakeIsRaised() {
+    public boolean isIntakeRaised() {
 	return !intakeSolenoid.get();
     }
 
@@ -107,6 +107,22 @@ public class Manipulator extends Subsystem {
 	intakeSolenoid.set(0);
     }
 
-    
+    /**
+     * Intakes boulders.
+     *
+     * @precondition intake is lowered
+     */
+    public void intakeBoulder() {
+	if (isIntakeLowered) intakeVictorSP.set(0.7);
+    }
+
+    /**
+     * Ejects boulders.
+     *
+     * @precondition intake is lowered
+     */
+    public void intakeBoulder() {
+	if (isIntakeLowered) intakeVictorSP.set(-0.7);
+    }
 }
 
