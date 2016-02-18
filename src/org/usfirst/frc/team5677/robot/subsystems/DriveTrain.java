@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5677.robot.subsystems;
 
 import org.usfirst.frc.team5677.robot.RobotMap;
-import org.usfirst.frc.team5677.robot.commands.ManualDriveCommand;
-import org.usfirst.frc.team5677.robot.commands.SetSpeedCommand;
+import org.usfirst.frc.team5677.robot.commands.DriveTrainManualDriveCommand;
+import org.usfirst.frc.team5677.robot.commands.DriveTrainSetSpeedCommand;
 
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -30,7 +30,7 @@ public class DriveTrain extends Subsystem {
      * human player to drive the robot using the joysticks.
      */
     public void initDefaultCommand() {
-    	setDefaultCommand(new ManualDriveCommand());
+    	setDefaultCommand(new DriveTrainManualDriveCommand());
     }
 
     /*

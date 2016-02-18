@@ -1,25 +1,29 @@
 package org.usfirst.frc.team5677.robot.commands;
 
-import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
+import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Lowers the intake.
+ * Sets the speed of the drive train.
  * 
  * @author Vedaad Shakib
+ * @version 02/11/16
  */
-public class LowerIntakeCommand extends Command {
-	Manipulator manipulator;
+public class DriveTrainSetSpeedCommand extends Command {
+	private DriveTrain driveTrain;
+	double speed;
 	
-    public LowerIntakeCommand() {
-        manipulator = Manipulator.getInstance();
-        requires(manipulator);
+    public DriveTrainSetSpeedCommand(double speed) {
+    	this.speed = speed;
+    	 
+        driveTrain = DriveTrain.getInstance();
+        requires(driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	manipulator.lowerIntake();
+    	driveTrain.setSpeed(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,7 +32,7 @@ public class LowerIntakeCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return manipulator.isIntakeLowered();
+        return true;
     }
 
     // Called once after isFinished returns true

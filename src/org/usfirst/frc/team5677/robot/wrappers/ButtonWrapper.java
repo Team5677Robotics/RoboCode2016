@@ -2,7 +2,7 @@ package org.usfirst.frc.team5677.robot.wrappers;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team5677.robot.commands.CancelCommand;
+import org.usfirst.frc.team5677.robot.commands.GamepadCancelCommand;
 
 /**
  * Wrapper class for Button that adds cancelWhenReleased and alters whilePressed to be more intuitive
@@ -16,7 +16,7 @@ abstract class ButtonWrapper extends Button {
      * @param c the command to cancel
      */
     public void cancelWhenReleased(Command c) {
-	whenReleased(new CancelCommand(c));
+	whenReleased(new GamepadCancelCommand(c));
     }
 
     /**

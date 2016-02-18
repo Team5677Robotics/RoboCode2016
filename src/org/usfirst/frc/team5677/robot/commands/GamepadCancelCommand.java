@@ -1,34 +1,38 @@
 package org.usfirst.frc.team5677.robot.commands;
 
-import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Retracts the intake using the intake solenoids.
+ * Cancels a command.
  * 
- * @author Vedaad Shakib
+ * @author Manan Shah
  */
-public class RaiseIntakeCommand extends Command {
-	Manipulator manipulator;
-	
-    public RaiseIntakeCommand() {
-        manipulator = Manipulator.getInstance();
-        requires(manipulator);
+public class GamepadCancelCommand extends Command {
+    
+    private Command c;
+    
+    /**
+     * Initializes a new CancelCommand to notify the Scheduler to stop a given command.
+     * 
+     * @param c The command that will be canceled.
+     */
+    public GamepadCancelCommand(Command c) {
+        this.c = c;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	manipulator.raiseIntake();
+      
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        c.cancel();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return manipulator.isIntakeRaised();
+        return true;
     }
 
     // Called once after isFinished returns true

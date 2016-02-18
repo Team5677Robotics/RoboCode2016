@@ -7,18 +7,18 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * Collects a boulder from the ground with the following steps:
  * 1) lowers the intake, 2) sucks in the boulder, and 3) raises the intake
  */
-public class CollectBoulderCommandGroup extends CommandGroup {
+public class IntakeCollectBoulderCommand extends CommandGroup {
     Timer timer;
     
     // time taken for the intake mechanism to successfully intake a boulder
     private final double INTAKE_TIME = 1.;
     
-    public  CollectBoulderCommandGroup() {
+    public  IntakeCollectBoulderCommand() {
     	timer = new Timer();
     	
-    	addSequential(new LowerIntakeCommand());
+    	addSequential(new IntakeLowerCommand());
     	addSequential(new IntakeBoulderCommand());
     	timer.delay(INTAKE_TIME);
-    	addSequential(new RaiseIntakeCommand());
+    	addSequential(new IntakeRaiseCommand());
     }
 }

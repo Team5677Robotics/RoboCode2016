@@ -1,40 +1,34 @@
 package org.usfirst.frc.team5677.robot.commands;
 
-import org.usfirst.frc.team5677.robot.OI;
-import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Enables the joystick to control the drivetrain.
+ * Lowers the intake.
  * 
  * @author Vedaad Shakib
- * @version 02/11/16
  */
-public class ManualDriveCommand extends Command {
-	DriveTrain driveTrain;
+public class IntakeLowerCommand extends Command {
+	Manipulator manipulator;
 	
-    public ManualDriveCommand() {
-        driveTrain = DriveTrain.getInstance();
-        requires(driveTrain);
+    public IntakeLowerCommand() {
+        manipulator = Manipulator.getInstance();
+        requires(manipulator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	manipulator.lowerIntake();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	for (int i = 0; i < 12; i++) {
-    		System.out.println(i+": "+OI.getGamepad().getRawAxis(i));
-    	}
-    	driveTrain.setSpeed(OI.getGamepad().getRawAxis(1), OI.getGamepad().getRawAxis(3));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return manipulator.isIntakeLowered();
     }
 
     // Called once after isFinished returns true

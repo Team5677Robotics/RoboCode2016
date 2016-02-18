@@ -35,10 +35,14 @@ public class Manipulator extends Subsystem {
     private Encoder shooterEncoder;
     private Spark shooterHorizRotSpark;
     private Spark shooterVertRotSpark;
+    private DigitalInput shooterRightLimitSwitch;
+    private DigitalInput shooterLeftLimitSwitch;
 
-    // constants to scale the speed of the intake and conveyor motors
+    // constants to scale the speed of the intake, conveyor, and shooter motors
     private final double INTAKE_SCALE = 0.7;
     private final double CONVEYOR_SCALE = 0.7;
+    private final double SHOOTER_SCALE = 0.7;
+    private final double HORIZ_ROT_SCALE = 0.7;
 
     /**
      * Initializes the various motors and solenoids of the manipulator.
@@ -55,6 +59,8 @@ public class Manipulator extends Subsystem {
 		shooterEncoder = new Encoder(RobotMap.Manipulator.SHOOTER_ENCODER_PORT_A, RobotMap.Manipulator.SHOOTER_ENCODER_PORT_B);
 		shooterHorizRotSpark = new Spark(RobotMap.Manipulator.SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT);
 		shooterVertRotSpark = new Spark(RobotMap.Manipulator.SHOOTER_VERTICAL_ROTATION_SPARK_PORT);
+		shooterRightLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_R_LIMIT_SWITCH_PORT);
+		shooterLeftLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_L_LIMIT_SWITCH_PORT);
     }
 
     public void initDefaultCommand() {
@@ -171,6 +177,34 @@ public class Manipulator extends Subsystem {
      */
     public void resetLoader() {
     	conveyorPiston.set(false);
+    }
+    
+    public double getShooterSpeed() {
+    	return shooterVictorSP.get();
+    }
+    
+    public void setShooterSpeed(double speed) {
+    	shooterVictorSP.set(SHOOTER_SCALE*speed);
+    }
+    
+    public int getEncoderCount() {
+    	return shooterEncoder.get();
+    }
+    
+    public boolean isRightLimitSwitchTriggered() {
+    	return shooterRightLimitSwitch.get();
+    }
+    
+    public boolean isLeftLimitSwitchTriggered() {
+    	return shooterLeftLimitSwitch.get();
+    }
+    
+    public double getHorizRotSpeed() {
+    	return shooterHorizRotSpark.get();
+    }
+    
+    public void setHorizRotSpeed(double speed) {
+    	shooterHorizRotSpark.set(HORIZ_ROT_SCALE*speed);
     }
 }
 

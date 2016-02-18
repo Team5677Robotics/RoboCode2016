@@ -38,6 +38,8 @@ public class RobotMap {
         public static final int SHOOTER_VICTORSP_PORT = 2;
         public static final int SHOOTER_ENCODER_PORT_A = -1;
         public static final int SHOOTER_ENCODER_PORT_B = -1;
+	public static final int SHOOTER_L_LIMIT_SWITCH_PORT = -1;
+	public static final int SHOOTER_R_LIMIT_SWITCH_PORT = -1;
         public static final int SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT = 3;
         public static final int SHOOTER_VERTICAL_ROTATION_SPARK_PORT = -1;
     }

@@ -1,29 +1,28 @@
 package org.usfirst.frc.team5677.robot.commands;
 
-import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Sets the speed of the drive train.
+ * Sets the speed of the shooter.
  * 
  * @author Vedaad Shakib
- * @version 02/11/16
  */
-public class SetSpeedCommand extends Command {
-	private DriveTrain driveTrain;
-	double speed;
+public class ShooterSetSpeedCommand extends Command {
+	Manipulator manipulator;
+	private double speed;
 	
-    public SetSpeedCommand(double speed) {
+    public ShooterSetSpeedCommand(double speed) {
     	this.speed = speed;
-    	 
-        driveTrain = DriveTrain.getInstance();
-        requires(driveTrain);
+    	
+        manipulator = Manipulator.getInstance();
+        requires(manipulator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	driveTrain.setSpeed(speed);
+    	manipulator.setShooterSpeed(speed);;
     }
 
     // Called repeatedly when this Command is scheduled to run
