@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5677.robot;
 
 import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,13 +22,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
     /**
-     * Initalizes the OI and DriveTrain.
+     * Initalizes the OI, DriveTrain, and Manipulator.
      * 
      * @postcondition initializes the OI and DriveTrain
      */
     public void robotInit() {
     	OI.initialize();
     	DriveTrain.initialize();
+    	Manipulator.initialize();
     }
 	
     /**

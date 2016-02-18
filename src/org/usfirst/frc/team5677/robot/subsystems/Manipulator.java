@@ -81,7 +81,7 @@ public class Manipulator extends Subsystem {
      * @return true if the intake is lowered; false otherwise
      */
     public boolean isIntakeLowered() {
-	return intakeSolenoid.get();
+    	return intakeSolenoid.get();
     }
 
     /**
@@ -90,14 +90,14 @@ public class Manipulator extends Subsystem {
      * @return false if the intake is raised; false otherwise
      */
     public boolean isIntakeRaised() {
-	return !intakeSolenoid.get();
+    	return !intakeSolenoid.get();
     }
 
     /**
      * Toggles the state of the intake.
      */
     public void toggleIntake() {
-	intakeSolenoid.set(!intakeSolenoid.get());
+    	intakeSolenoid.set(!intakeSolenoid.get());
     }
 
     /**
@@ -111,7 +111,7 @@ public class Manipulator extends Subsystem {
      * Raises the intake.
      */
     public void raiseIntake() {
-	intakeSolenoid.set(false);
+    	intakeSolenoid.set(false);
     }
 
     /**
