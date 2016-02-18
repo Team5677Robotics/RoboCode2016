@@ -5,6 +5,8 @@ import org.usfirst.frc.team5677.robot.RobotMap;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -20,33 +22,35 @@ public class Manipulator extends Subsystem {
     private static Manipulator manipulator;
 
     private Solenoid intakeSolenoid;
-    private VictorSP intakeVictorSP;
+    private Talon intakeTalon;
 
-    private VictorSP conveyorVictorSP;
-    // assuming it's a solenoid until further notification
+    private Spark conveyorSpark;
     private Solenoid conveyorPiston;
     private DigitalInput conveyorLimitSwitch;
 
     private VictorSP shooterVictorSP;
     private Encoder shooterEncoder;
-    private VictorSP shooterHorizRotVictorSP;
-    private VictorSP shooterVertRotVictorSP;
+    private Spark shooterHorizRotSpark;
+    private Spark shooterVertRotSpark;
+    
+    private final double INTAKE_SCALE = 0.7;
+    private final double CONVEYOR_SCALE = 0.7;
 
     /**
      * Initializes the various motors and solenoids of the manipulator.
      */
     public Manipulator() {
 		intakeSolenoid = new Solenoid(RobotMap.Manipulator.INTAKE_SOLENOID_PORT);
-		intakeVictorSP = new VictorSP(RobotMap.Manipulator.INTAKE_VICTORSP_PORT);
+		intakeTalon = new Talon(RobotMap.Manipulator.INTAKE_TALON_PORT);
 		
-		conveyorVictorSP = new VictorSP(RobotMap.Manipulator.CONVEYOR_VICTORSP_PORT);
+		conveyorSpark = new Spark(RobotMap.Manipulator.CONVEYOR_SPARK_PORT);
 		conveyorLimitSwitch = new DigitalInput(RobotMap.Manipulator.CONVEYOR_LIMIT_SWITCH_PORT);
 		conveyorPiston = new Solenoid(RobotMap.Manipulator.CONVEYOR_PISTON_PORT);
 		
 		shooterVictorSP = new VictorSP(RobotMap.Manipulator.SHOOTER_VICTORSP_PORT);
 		shooterEncoder = new Encoder(RobotMap.Manipulator.SHOOTER_ENCODER_PORT_A, RobotMap.Manipulator.SHOOTER_ENCODER_PORT_B);
-		shooterHorizRotVictorSP = new VictorSP(RobotMap.Manipulator.SHOOTER_HORIZONTAL_ROTATION_VICTORSP_PORT);
-		shooterVertRotVictorSP = new VictorSP(RobotMap.Manipulator.SHOOTER_VERTICAL_ROTATION_VICTORSP_PORT);
+		shooterHorizRotSpark = new Spark(RobotMap.Manipulator.SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT);
+		shooterVertRotSpark = new Spark(RobotMap.Manipulator.SHOOTER_VERTICAL_ROTATION_SPARK_PORT);
     }
 
     public void initDefaultCommand() {
@@ -67,8 +71,8 @@ public class Manipulator extends Subsystem {
      * @return the singleton instance of Manipulator.
      */
     public static Manipulator getInstance() {
-	initialize();
-	return manipulator;
+    	initialize();
+    	return manipulator;
     }
 
     /**
@@ -116,7 +120,7 @@ public class Manipulator extends Subsystem {
      * @precondition intake is lowered
      */
     public void intakeBoulder() {
-    	if (isIntakeLowered()) intakeVictorSP.set(0.7);
+    	if (isIntakeLowered()) intakeTalon.set(INTAKE_SCALE);
     }
 
     /**
@@ -125,15 +129,15 @@ public class Manipulator extends Subsystem {
      * @precondition intake is lowered
      */
     public void ejectBoulder() {
-    	if (isIntakeLowered()) intakeVictorSP.set(-0.7);
+    	if (isIntakeLowered()) intakeTalon.set(-INTAKE_SCALE);
     }
 
     public void conveyorRaiseBoulder() {
-    	conveyorVictorSP.set(0.7);
+    	conveyorSpark.set(CONVEYOR_SCALE);
     }
 
     public void conveyorLowerBoulder() {
-    	conveyorVictorSP.set(-0.7);
+    	conveyorSpark.set(-CONVEYOR_SCALE);
     }
 
     public boolean isConveyorHeightMax() {
