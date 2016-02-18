@@ -21,18 +21,22 @@ public class Manipulator extends Subsystem {
     // singleton instance of Manipulator
     private static Manipulator manipulator;
 
+    // motors and solenoids for the intake mechanism
     private Solenoid intakeSolenoid;
     private Talon intakeTalon;
 
+    // motors, solenoids, and limit switches for the conveyor mechanism
     private Spark conveyorSpark;
     private Solenoid conveyorPiston;
     private DigitalInput conveyorLimitSwitch;
 
+    // motors, solenoids, and limit switches for the shooting mechanism
     private VictorSP shooterVictorSP;
     private Encoder shooterEncoder;
     private Spark shooterHorizRotSpark;
     private Spark shooterVertRotSpark;
-    
+
+    // constants to scale the speed of the intake and conveyor motors
     private final double INTAKE_SCALE = 0.7;
     private final double CONVEYOR_SCALE = 0.7;
 
@@ -94,28 +98,28 @@ public class Manipulator extends Subsystem {
     }
 
     /**
-     * Toggles the state of the intake.
+     * Toggles the state of the intake by toggling the intake solenoid.
      */
     public void toggleIntake() {
     	intakeSolenoid.set(!intakeSolenoid.get());
     }
 
     /**
-     * Lowers the intake.
+     * Lowers the intake by turning the solenoid on.
      */
     public void lowerIntake() {
     	intakeSolenoid.set(true);
     }
 
     /**
-     * Raises the intake.
+     * Raises the intake by turning the intake solenoid off.
      */
     public void raiseIntake() {
     	intakeSolenoid.set(false);
     }
 
     /**
-     * Intakes boulders.
+     * Intakes boulders by running the intake talon forward.
      *
      * @precondition intake is lowered
      */
@@ -124,7 +128,7 @@ public class Manipulator extends Subsystem {
     }
 
     /**
-     * Ejects boulders.
+     * Ejects boulders by running the intake talon in reverse.
      *
      * @precondition intake is lowered
      */
@@ -132,22 +136,39 @@ public class Manipulator extends Subsystem {
     	if (isIntakeLowered()) intakeTalon.set(-INTAKE_SCALE);
     }
 
+    /**
+     * Raises the boulder via the conveyor by running the conveyor spark forward.
+     */
     public void conveyorRaiseBoulder() {
     	conveyorSpark.set(CONVEYOR_SCALE);
     }
 
+    /**
+     * Lowers the boulder via the conveyor by running the conveyor spark in reverse.
+     */
     public void conveyorLowerBoulder() {
     	conveyorSpark.set(-CONVEYOR_SCALE);
     }
 
+    /**
+     * Returns whether the ball in the conveyor has reached its maximum height.
+     *
+     * @return whether the ball in the conveyor has reached its maximum height.
+     */
     public boolean isConveyorHeightMax() {
     	return conveyorLimitSwitch.get();
     }
 
+    /**
+     * Loads the boulder from the conveyor into the shooter by powering the conveyor solenoid.
+     */
     public void loadBoulder() {
     	conveyorPiston.set(true);
     }
 
+    /**
+     * Resets the conveyor loader by turning off the conveyor solenoid.
+     */
     public void resetLoader() {
     	conveyorPiston.set(false);
     }
