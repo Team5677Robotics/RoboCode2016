@@ -9,9 +9,6 @@ package org.usfirst.frc.team5677.robot;
  * @version 02/10/16
  */
 public class RobotMap {
-    /*
-     * Contains constants used by DriveTrain instance.
-     */
     public class DriveTrain {
        public static final int DT_VICTORSP_L_PORT = 0;
        public static final int DT_VICTORSP_R_PORT = 1;
@@ -28,19 +25,20 @@ public class RobotMap {
      * Contains constants used by Manipulator instance.
      */
     public class Manipulator {
-        public static final int INTAKE_SOLENOID_PORT = -1;
+    	// 0 = unknown
+        public static final int INTAKE_SOLENOID_PORT = 0;
         public static final int INTAKE_TALON_PORT = 6;
         
         public static final int CONVEYOR_SPARK_PORT = 4;
-        public static final int CONVEYOR_PISTON_PORT = -1;
-        public static final int CONVEYOR_LIMIT_SWITCH_PORT = -1;
+        public static final int CONVEYOR_PISTON_PORT = 2;
+        public static final int CONVEYOR_LIMIT_SWITCH_PORT = 1;
         
         public static final int SHOOTER_VICTORSP_PORT = 2;
-        public static final int SHOOTER_ENCODER_PORT_A = -1;
-        public static final int SHOOTER_ENCODER_PORT_B = -1;
-	public static final int SHOOTER_L_LIMIT_SWITCH_PORT = -1;
-	public static final int SHOOTER_R_LIMIT_SWITCH_PORT = -1;
+        public static final int SHOOTER_ENCODER_PORT_A = 2;
+        public static final int SHOOTER_ENCODER_PORT_B = 3;
+        public static final int SHOOTER_L_LIMIT_SWITCH_PORT = 4;
+        public static final int SHOOTER_R_LIMIT_SWITCH_PORT = 5;
         public static final int SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT = 3;
-        public static final int SHOOTER_VERTICAL_ROTATION_SPARK_PORT = -1;
+        public static final int SHOOTER_VERTICAL_ROTATION_SPARK_PORT = 8;
     }
 }

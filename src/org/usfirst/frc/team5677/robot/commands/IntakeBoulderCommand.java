@@ -11,15 +11,18 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class IntakeBoulderCommand extends Command {
 	Manipulator manipulator;
+	private double speed;
 	
-    public IntakeBoulderCommand() {
+    public IntakeBoulderCommand(double speed) {
+    	this.speed = speed;
+    	
         manipulator = Manipulator.getInstance();
         requires(manipulator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	manipulator.intakeBoulder();
+    	manipulator.intakeBoulder(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run

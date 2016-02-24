@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,12 +22,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @version 02/11/16
  */
 public class Robot extends IterativeRobot {
+	CameraServer camera;
+	
     /**
      * Initalizes the OI, DriveTrain, and Manipulator.
      * 
      * @postcondition initializes the OI and DriveTrain
      */
     public void robotInit() {
+    	CameraServer cam = CameraServer.getInstance();
+    	// set any cam parameters, then start capture
+    	cam.startAutomaticCapture("cam0");
+    	
     	OI.initialize();
     	DriveTrain.initialize();
     	Manipulator.initialize();
