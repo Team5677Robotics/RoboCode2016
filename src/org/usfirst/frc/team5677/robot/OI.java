@@ -23,7 +23,7 @@ public class OI {
 	/*
 	 * Creates gamepad instance.
 	 */
-	public OI () {
+	public OI() {
 		gamepad = new GamepadWrapper(RobotMap.OI.GAMEPAD_PORT);
 		
 		//gamepad.getButtonBumperLeft().whenActive(new IntakeBoulderCommand());
