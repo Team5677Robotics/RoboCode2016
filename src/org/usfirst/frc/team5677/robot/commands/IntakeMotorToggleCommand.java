@@ -5,24 +5,24 @@ import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Sets the speed of the shooter.
+ * Toggles the intake motor
  * 
  * @author Vedaad Shakib
  */
-public class ShooterSetSpeedCommand extends Command {
+public class IntakeMotorToggleCommand extends Command {
 	Manipulator manipulator;
-	private double speed;
 	
-    public ShooterSetSpeedCommand(double speed) {
-    	this.speed = speed;
-    	
+    public IntakeMotorToggleCommand() {
         manipulator = Manipulator.getInstance();
-        requires(manipulator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	manipulator.setShooterSpeed(speed);;
+    	if (manipulator.intakeGetSpeed() < 0) {
+    		manipulator.intakeSetSpeed(1);
+    	} else {
+    		manipulator.intakeSetSpeed(0);
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,7 +31,7 @@ public class ShooterSetSpeedCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -5,24 +5,24 @@ import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Sets the speed of the shooter.
+ * Toggles the intake using the intake solenoids.
  * 
  * @author Vedaad Shakib
  */
-public class ShooterSetSpeedCommand extends Command {
+public class IntakeToggleCommand extends Command {
 	Manipulator manipulator;
-	private double speed;
 	
-    public ShooterSetSpeedCommand(double speed) {
-    	this.speed = speed;
-    	
+    public IntakeToggleCommand() {
         manipulator = Manipulator.getInstance();
         requires(manipulator);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	manipulator.setShooterSpeed(speed);;
+    	if (manipulator.isIntakeLowered())
+    		manipulator.raiseIntake();
+    	else
+    		manipulator.lowerIntake();
     }
 
     // Called repeatedly when this Command is scheduled to run

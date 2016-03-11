@@ -46,25 +46,20 @@ public class Manipulator extends Subsystem {
     /**
      * Initializes the various motors and solenoids of the manipulator.
      */
-//    public Manipulator() {
-//		intakeSolenoid = new Solenoid(RobotMap.Manipulator.INTAKE_SOLENOID_PORT);
-//		intakeTalon = new Talon(RobotMap.Manipulator.INTAKE_TALON_PORT);
-//		
-    	//conveyorSpark = new Talon(RobotMap.Manipulator.CONVEYOR_SPARK_PORT);
-//		conveyorLimitSwitch = new DigitalInput(RobotMap.Manipulator.CONVEYOR_LIMIT_SWITCH_PORT);
-//		conveyorPiston = new Solenoid(RobotMap.Manipulator.CONVEYOR_PISTON_PORT);
-//		
-//		shooterVictorSP = new VictorSP(RobotMap.Manipulator.SHOOTER_VICTORSP_PORT);
-//		shooterEncoder = new Encoder(RobotMap.Manipulator.SHOOTER_ENCODER_PORT_A, RobotMap.Manipulator.SHOOTER_ENCODER_PORT_B);
-//		shooterHorizRotSpark = new Talon(RobotMap.Manipulator.SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT);
-//		shooterVertRotSpark = new Talon(RobotMap.Manipulator.SHOOTER_VERTICAL_ROTATION_SPARK_PORT);
-//		shooterRightLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_R_LIMIT_SWITCH_PORT);
-//		shooterLeftLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_L_LIMIT_SWITCH_PORT);
-//    }
     public Manipulator() {
-    	intakeSolenoid = new Solenoid(RobotMap.Manipulator.INTAKE_SOLENOID_PORT);
-    	intakeTalon = new Talon(RobotMap.Manipulator.INTAKE_TALON_PORT);
+		intakeSolenoid = new Solenoid(RobotMap.Manipulator.INTAKE_SOLENOID_PORT);
+		intakeTalon = new Talon(RobotMap.Manipulator.INTAKE_TALON_PORT);
+		
     	conveyorSpark = new Talon(RobotMap.Manipulator.CONVEYOR_SPARK_PORT);
+		conveyorLimitSwitch = new DigitalInput(RobotMap.Manipulator.CONVEYOR_LIMIT_SWITCH_PORT);
+		conveyorPiston = new Solenoid(RobotMap.Manipulator.CONVEYOR_PISTON_PORT);
+		
+		shooterVictorSP = new VictorSP(RobotMap.Manipulator.SHOOTER_VICTORSP_PORT);
+		shooterEncoder = new Encoder(RobotMap.Manipulator.SHOOTER_ENCODER_PORT_A, RobotMap.Manipulator.SHOOTER_ENCODER_PORT_B);
+		shooterHorizRotSpark = new Talon(RobotMap.Manipulator.SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT);
+		shooterVertRotSpark = new Talon(RobotMap.Manipulator.SHOOTER_VERTICAL_ROTATION_SPARK_PORT);
+		shooterRightLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_R_LIMIT_SWITCH_PORT);
+		shooterLeftLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_L_LIMIT_SWITCH_PORT);
     }
 
     public void initDefaultCommand() {
@@ -133,87 +128,90 @@ public class Manipulator extends Subsystem {
      *
      * @precondition intake is lowered
      */
-    public void intakeBoulder(double speed) {
+    public void intakeSetSpeed(double speed) {
     	intakeTalon.set(INTAKE_SCALE*speed);
     }
-//
-//    /**
-//     * Ejects boulders by running the intake talon in reverse.
-//     *
-//     * @precondition intake is lowered
-//     */
-//    public void ejectBoulder() {
-//    	if (isIntakeLowered()) intakeTalon.set(-INTAKE_SCALE);
-//    }
+    
+    public double intakeGetSpeed() {
+    	return intakeTalon.get();
+    }
+
       /**
-	   * Raises the boulder via the conveyor by running the conveyor spark forward.
+	   * Sets the speed of the conveyor motor.
 	   */
 	  public void conveyorSetSpeed(double speed) {
 	 	conveyorSpark.set(speed*CONVEYOR_SCALE);
 	  }
 	  
-//    /**
-//     * Raises the boulder via the conveyor by running the conveyor spark forward.
-//     */
-//    public void conveyorRaiseBoulder() {
-//    	conveyorSpark.set(CONVEYOR_SCALE);
-//    }
-//
-//    /**
-//     * Lowers the boulder via the conveyor by running the conveyor spark in reverse.
-//     */
-//    public void conveyorLowerBoulder() {
-//    	conveyorSpark.set(-CONVEYOR_SCALE);
-//    }
-//
-//    /**
-//     * Returns whether the ball in the conveyor has reached its maximum height.
-//     *
-//     * @return whether the ball in the conveyor has reached its maximum height.
-//     */
-//    public boolean isConveyorHeightMax() {
-//    	return conveyorLimitSwitch.get();
-//    }
-//
-//    /**
-//     * Loads the boulder from the conveyor into the shooter by powering the conveyor solenoid.
-//     */
-//    public void loadBoulder() {
-//    	conveyorPiston.set(true);
-//    }
-//
-//    /**
-//     * Resets the conveyor loader by turning off the conveyor solenoid.
-//     */
-//    public void resetLoader() {
-//    	conveyorPiston.set(false);
-//    }
-//    
-//    public double getShooterSpeed() {
-//    	return shooterVictorSP.get();
-//    }
-//    
-//    public void setShooterSpeed(double speed) {
-//    	shooterVictorSP.set(SHOOTER_SCALE*speed);
-//    }
-//    
-//    public int getEncoderCount() {
-//    	return shooterEncoder.get();
-//    }
-//    
-//    public boolean isRightLimitSwitchTriggered() {
-//    	return shooterRightLimitSwitch.get();
-//    }
-//    
-//    public boolean isLeftLimitSwitchTriggered() {
-//    	return shooterLeftLimitSwitch.get();
-//    }
-//    
-//    public double getHorizRotSpeed() {
-//    	return shooterHorizRotSpark.get();
-//    }
-//    
-//    public void setHorizRotSpeed(double speed) {
-//    	shooterHorizRotSpark.set(HORIZ_ROT_SCALE*speed);
-//    }
+	  /**
+	   * Gets the speed of the conveyor motor.
+	   */
+	  public double conveyorGetSpeed() {
+	 	return conveyorSpark.getSpeed();
+	  }
+	  
+    /**
+     * Raises the boulder via the conveyor by running the conveyor spark forward.
+     */
+    public void conveyorRaiseBoulder() {
+    	conveyorSpark.set(CONVEYOR_SCALE);
+    }
+
+    /**
+     * Lowers the boulder via the conveyor by running the conveyor spark in reverse.
+     */
+    public void conveyorLowerBoulder() {
+    	conveyorSpark.set(-CONVEYOR_SCALE);
+    }
+
+    /**
+     * Returns whether the ball in the conveyor has reached its maximum height.
+     *
+     * @return whether the ball in the conveyor has reached its maximum height.
+     */
+    public boolean isConveyorHeightMax() {
+    	return conveyorLimitSwitch.get();
+    }
+
+    /**
+     * Loads the boulder from the conveyor into the shooter by powering the conveyor solenoid.
+     */
+    public void loadBoulder() {
+    	conveyorPiston.set(true);
+    }
+
+    /**
+     * Resets the conveyor loader by turning off the conveyor solenoid.
+     */
+    public void resetLoader() {
+    	conveyorPiston.set(false);
+    }
+    
+    public double getShooterSpeed() {
+    	return shooterVictorSP.get();
+    }
+    
+    public void setShooterSpeed(double speed) {
+    	shooterVictorSP.set(SHOOTER_SCALE*speed);
+    }
+    
+    public int getEncoderCount() {
+    	return shooterEncoder.get();
+    }
+    
+    public boolean isRightLimitSwitchTriggered() {
+    	return shooterRightLimitSwitch.get();
+    }
+    
+    public boolean isLeftLimitSwitchTriggered() {
+    	return shooterLeftLimitSwitch.get();
+    }
+    
+    public double getHorizRotSpeed() {
+    	return shooterHorizRotSpark.get();
+    }
+    
+    public void setHorizRotSpeed(double speed) {
+    	shooterHorizRotSpark.set(HORIZ_ROT_SCALE*speed);
+    }
 }

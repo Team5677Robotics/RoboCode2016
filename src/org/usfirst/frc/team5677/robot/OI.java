@@ -2,8 +2,13 @@ package org.usfirst.frc.team5677.robot;
 
 import org.usfirst.frc.team5677.robot.commands.ConveyorSetSpeedCommand;
 import org.usfirst.frc.team5677.robot.commands.IntakeBoulderCommand;
+import org.usfirst.frc.team5677.robot.commands.IntakeConveyorSetSpeedCommandGroup;
 import org.usfirst.frc.team5677.robot.commands.IntakeLowerCommand;
 import org.usfirst.frc.team5677.robot.commands.IntakeRaiseCommand;
+import org.usfirst.frc.team5677.robot.commands.IntakeToggleCommand;
+import org.usfirst.frc.team5677.robot.commands.ResetShooterCommandGroup;
+import org.usfirst.frc.team5677.robot.commands.ShootCommandGroup;
+import org.usfirst.frc.team5677.robot.commands.ToggleIntakeConveyorCommandGroup;
 import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 import org.usfirst.frc.team5677.robot.wrappers.GamepadWrapper;
 
@@ -26,15 +31,17 @@ public class OI {
 	public OI() {
 		gamepad = new GamepadWrapper(RobotMap.OI.GAMEPAD_PORT);
 		
-		//gamepad.getButtonBumperLeft().whenActive(new IntakeBoulderCommand());
-		gamepad.getButtonBumperLeft().whenPressed(new IntakeBoulderCommand(1));
-		gamepad.getButtonBumperLeft().whenReleased(new IntakeBoulderCommand(0));
+		gamepad.getButtonBumperRight().whenPressed(new ToggleIntakeConveyorCommandGroup());
+		gamepad.getButtonBumperRight().whenReleased(new ToggleIntakeConveyorCommandGroup());
 		
-		gamepad.getButtonBumperRight().whenPressed(new ConveyorSetSpeedCommand(1));
-		gamepad.getButtonBumperRight().whenReleased(new ConveyorSetSpeedCommand(0));
+		gamepad.getButtonBumperLeft().whenPressed(new IntakeConveyorSetSpeedCommandGroup(-1));
+		gamepad.getButtonBumperLeft().whenReleased(new IntakeConveyorSetSpeedCommandGroup(0));
 		
 		gamepad.getButtonA().whenPressed(new IntakeLowerCommand());
 		gamepad.getButtonA().whenReleased(new IntakeRaiseCommand());
+		
+		gamepad.getButtonB().whenPressed(new ShootCommandGroup());
+		gamepad.getButtonB().whenReleased(new ResetShooterCommandGroup());
 	}
 	
 	public static void initialize() {

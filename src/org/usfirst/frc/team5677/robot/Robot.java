@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	CameraServer camera;
 	
     /**
-     * Initalizes the OI, DriveTrain, and Manipulator.
+     * Initializes the OI, DriveTrain, and Manipulator.
      * 
      * @postcondition initializes the OI and DriveTrain
      */

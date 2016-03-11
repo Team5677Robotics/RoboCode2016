@@ -22,7 +22,7 @@ public class IntakeBoulderCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	manipulator.intakeBoulder(speed);
+    	manipulator.intakeSetSpeed(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
