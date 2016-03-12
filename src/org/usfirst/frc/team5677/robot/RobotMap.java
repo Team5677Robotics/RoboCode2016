@@ -18,7 +18,7 @@ public class RobotMap {
      * Contains constants used by OI instance.
      */
     public class OI {
-       public static final int GAMEPAD_PORT = 0;
+       public static final int GAMEPAD_PORT = 5;
     }
         
     /*
@@ -26,19 +26,19 @@ public class RobotMap {
      */
     public class Manipulator {
     	// 0 = unknown
-        public static final int INTAKE_SOLENOID_PORT = 0;
+        public static final int INTAKE_SOLENOID_PORT = 6;
         public static final int INTAKE_TALON_PORT = 6;
         
         public static final int CONVEYOR_SPARK_PORT = 4;
-        public static final int CONVEYOR_PISTON_PORT = 2;
+        public static final int CONVEYOR_PISTON_PORT = 8;
         public static final int CONVEYOR_LIMIT_SWITCH_PORT = 1;
         
         public static final int SHOOTER_VICTORSP_PORT = 2;
-        public static final int SHOOTER_ENCODER_PORT_A = 2;
-        public static final int SHOOTER_ENCODER_PORT_B = 3;
+        public static final int SHOOTER_ENCODER_PORT_A = 0;
+        public static final int SHOOTER_ENCODER_PORT_B = 1;
         public static final int SHOOTER_L_LIMIT_SWITCH_PORT = 4;
         public static final int SHOOTER_R_LIMIT_SWITCH_PORT = 5;
         public static final int SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT = 3;
-        public static final int SHOOTER_VERTICAL_ROTATION_SPARK_PORT = 8;
+        public static final int SHOOTER_VERTICAL_ROTATION_SPARK_PORT = 7;
     }
 }

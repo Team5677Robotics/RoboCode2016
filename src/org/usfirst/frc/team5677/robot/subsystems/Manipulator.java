@@ -129,7 +129,7 @@ public class Manipulator extends Subsystem {
      * @precondition intake is lowered
      */
     public void intakeSetSpeed(double speed) {
-    	intakeTalon.set(INTAKE_SCALE*speed);
+    	intakeTalon.set(-1*INTAKE_SCALE*speed);
     }
     
     public double intakeGetSpeed() {
