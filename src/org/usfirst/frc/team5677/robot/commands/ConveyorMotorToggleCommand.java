@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ConveyorMotorToggleCommand extends Command {
 	Manipulator manipulator;
+	double eps = Math.pow(10, -6);
 	
     public ConveyorMotorToggleCommand() {
     	manipulator = Manipulator.getInstance();
@@ -21,7 +22,7 @@ public class ConveyorMotorToggleCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (manipulator.conveyorGetSpeed() < 0)
+    	if (manipulator.conveyorGetSpeed() < eps || manipulator.conveyorGetSpeed() > -eps)
     		manipulator.conveyorSetSpeed(1);
     	else
     		manipulator.conveyorSetSpeed(0);
@@ -29,7 +30,7 @@ public class ConveyorMotorToggleCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

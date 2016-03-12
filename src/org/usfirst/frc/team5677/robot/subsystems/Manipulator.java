@@ -38,8 +38,8 @@ public class Manipulator extends Subsystem {
     private DigitalInput shooterLeftLimitSwitch;
 
     // constants to scale the speed of the intake, conveyor, and shooter motors
-    private final double INTAKE_SCALE = 0.4;
-    private final double CONVEYOR_SCALE = 0.3;
+    private final double INTAKE_SCALE = 0.7;
+    private final double CONVEYOR_SCALE = 0.375;
     private final double SHOOTER_SCALE = 0.7;
     private final double HORIZ_ROT_SCALE = 0.7;
 
@@ -55,7 +55,7 @@ public class Manipulator extends Subsystem {
 		conveyorPiston = new Solenoid(RobotMap.Manipulator.CONVEYOR_PISTON_PORT);
 		
 		shooterVictorSP = new VictorSP(RobotMap.Manipulator.SHOOTER_VICTORSP_PORT);
-		shooterEncoder = new Encoder(RobotMap.Manipulator.SHOOTER_ENCODER_PORT_A, RobotMap.Manipulator.SHOOTER_ENCODER_PORT_B);
+		//shooterEncoder = new Encoder(RobotMap.Manipulator.SHOOTER_ENCODER_PORT_A, RobotMap.Manipulator.SHOOTER_ENCODER_PORT_B);
 		shooterHorizRotSpark = new Talon(RobotMap.Manipulator.SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT);
 		shooterVertRotSpark = new Talon(RobotMap.Manipulator.SHOOTER_VERTICAL_ROTATION_SPARK_PORT);
 		shooterRightLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_R_LIMIT_SWITCH_PORT);
@@ -192,7 +192,7 @@ public class Manipulator extends Subsystem {
     }
     
     public void setShooterSpeed(double speed) {
-    	shooterVictorSP.set(SHOOTER_SCALE*speed);
+    	shooterVictorSP.set(-1*SHOOTER_SCALE*speed);
     }
     
     public int getEncoderCount() {

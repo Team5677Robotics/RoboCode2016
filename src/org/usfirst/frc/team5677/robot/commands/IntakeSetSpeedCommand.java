@@ -14,7 +14,6 @@ public class IntakeSetSpeedCommand extends Command {
     public IntakeSetSpeedCommand(double speed) {
     	this.speed = speed;
     	manipulator = Manipulator.getInstance();
-    	requires(manipulator);
     }
 
     // Called just before this Command runs the first time
@@ -28,7 +27,7 @@ public class IntakeSetSpeedCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

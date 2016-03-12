@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class IntakeConveyorToggleCommandGroup extends CommandGroup {
     
     public  IntakeConveyorToggleCommandGroup() {
+    	System.out.println("intake conveyor command called");
         addParallel(new ConveyorMotorToggleCommand());
-        addParallel(new IntakeToggleCommand());
         addParallel(new IntakeMotorToggleCommand());
     }
 }

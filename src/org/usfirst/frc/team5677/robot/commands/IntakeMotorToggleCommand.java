@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class IntakeMotorToggleCommand extends Command {
 	Manipulator manipulator;
+	double eps = Math.pow(10, -6);
 	
     public IntakeMotorToggleCommand() {
         manipulator = Manipulator.getInstance();
@@ -18,7 +19,7 @@ public class IntakeMotorToggleCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (manipulator.intakeGetSpeed() < 0) {
+    	if (manipulator.intakeGetSpeed() < eps || manipulator.intakeGetSpeed() > -eps) {
     		manipulator.intakeSetSpeed(1);
     	} else {
     		manipulator.intakeSetSpeed(0);
@@ -31,7 +32,7 @@ public class IntakeMotorToggleCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

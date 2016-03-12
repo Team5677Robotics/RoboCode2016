@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5677.robot;
 
+import org.usfirst.frc.team5677.robot.commands.ConveyorLoadBoulderCommand;
+import org.usfirst.frc.team5677.robot.commands.ConveyorResetLoaderCommand;
 import org.usfirst.frc.team5677.robot.commands.ConveyorSetSpeedCommand;
 import org.usfirst.frc.team5677.robot.commands.IntakeBoulderCommand;
 import org.usfirst.frc.team5677.robot.commands.IntakeConveyorSetSpeedCommandGroup;
@@ -31,16 +33,19 @@ public class OI {
 	public OI() {
 		gamepad = new GamepadWrapper(RobotMap.OI.GAMEPAD_PORT);
 		
-		gamepad.getButtonBumperRight().whenPressed(new IntakeConveyorToggleCommandGroup());
+		gamepad.getButtonBumperRight().whenPressed(new IntakeConveyorSetSpeedCommandGroup(1));
+		gamepad.getButtonBumperRight().whenReleased(new IntakeConveyorSetSpeedCommandGroup(0));
 		
 		gamepad.getButtonBumperLeft().whenPressed(new IntakeConveyorSetSpeedCommandGroup(-1));
 		gamepad.getButtonBumperLeft().whenReleased(new IntakeConveyorSetSpeedCommandGroup(0));
 		
-		gamepad.getButtonA().whenPressed(new IntakeLowerCommand());
-		gamepad.getButtonA().whenReleased(new IntakeRaiseCommand());
+		gamepad.getButtonA().whenPressed(new IntakeToggleCommand());
 		
 		gamepad.getButtonB().whenPressed(new ShootCommandGroup());
 		gamepad.getButtonB().whenReleased(new ResetShooterCommandGroup());
+		
+		gamepad.getButtonTriggerRight().whenPressed(new ConveyorLoadBoulderCommand());
+		gamepad.getButtonTriggerRight().whenReleased(new ConveyorResetLoaderCommand());
 	}
 	
 	public static void initialize() {
