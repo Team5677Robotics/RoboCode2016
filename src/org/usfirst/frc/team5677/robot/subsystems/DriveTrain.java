@@ -19,7 +19,7 @@ public class DriveTrain extends Subsystem {
     private static VictorSP victorRight;
     
     // speed scale
-    private static final double SCALE = 0.7;
+    private static final double SCALE = 0.9;
 
     // singleton instance of DriveTrain
     private static DriveTrain driveTrain;

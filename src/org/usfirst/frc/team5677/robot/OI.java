@@ -32,7 +32,7 @@ public class OI {
 	 */
 	public OI() {
 		gamepad = new GamepadWrapper(RobotMap.OI.GAMEPAD_PORT);
-		
+	
 		gamepad.getButtonBumperRight().whenPressed(new IntakeConveyorSetSpeedCommandGroup(1));
 		gamepad.getButtonBumperRight().whenReleased(new IntakeConveyorSetSpeedCommandGroup(0));
 		

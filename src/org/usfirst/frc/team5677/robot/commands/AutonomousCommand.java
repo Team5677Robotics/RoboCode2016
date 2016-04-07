@@ -1,22 +1,20 @@
 package org.usfirst.frc.team5677.robot.commands;
 
-import org.usfirst.frc.team5677.robot.OI;
 import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Enables the joystick to control the drivetrain.
- * 
- * @author Vedaad Shakib
- * @version 02/11/16
+ *
  */
-public class DriveTrainManualDriveCommand extends Command {
-	DriveTrain driveTrain;
+public class AutonomousCommand extends Command {
+	DriveTrain drivetrain;
+	private final double DRIVE_TIME = SmartDashboard.getDouble("Auton Drive Time", 7);	
 	
-    public DriveTrainManualDriveCommand() {
-        driveTrain = DriveTrain.getInstance();
-        requires(driveTrain);
+    public AutonomousCommand() {
+        drivetrain = DriveTrain.getInstance();
+        setTimeout(DRIVE_TIME);
     }
 
     // Called just before this Command runs the first time
@@ -26,16 +24,17 @@ public class DriveTrainManualDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	driveTrain.setSpeed(OI.getGamepad().getRawAxis(1), OI.getGamepad().getRawAxis(3));
+    	drivetrain.setSpeed(-1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	drivetrain.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

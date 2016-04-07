@@ -1,9 +1,12 @@
 package org.usfirst.frc.team5677.robot.subsystems;
 
 import org.usfirst.frc.team5677.robot.RobotMap;
+import org.usfirst.frc.team5677.robot.commands.DriveTrainManualDriveCommand;
+import org.usfirst.frc.team5677.robot.commands.ServoManualRotationCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -33,14 +36,14 @@ public class Manipulator extends Subsystem {
     private VictorSP shooterVictorSP;
     private Encoder shooterEncoder;
     private Talon shooterHorizRotSpark;
-    private Talon shooterVertRotSpark;
+    private Servo shooterVertRotServo;
     private DigitalInput shooterRightLimitSwitch;
     private DigitalInput shooterLeftLimitSwitch;
 
     // constants to scale the speed of the intake, conveyor, and shooter motors
     private final double INTAKE_SCALE = 0.7;
-    private final double CONVEYOR_SCALE = 0.375;
-    private final double SHOOTER_SCALE = 0.7;
+    private final double CONVEYOR_SCALE = 0.4;
+    private final double SHOOTER_SCALE = 1;
     private final double HORIZ_ROT_SCALE = 0.7;
 
     /**
@@ -57,12 +60,13 @@ public class Manipulator extends Subsystem {
 		shooterVictorSP = new VictorSP(RobotMap.Manipulator.SHOOTER_VICTORSP_PORT);
 		//shooterEncoder = new Encoder(RobotMap.Manipulator.SHOOTER_ENCODER_PORT_A, RobotMap.Manipulator.SHOOTER_ENCODER_PORT_B);
 		shooterHorizRotSpark = new Talon(RobotMap.Manipulator.SHOOTER_HORIZONTAL_ROTATION_SPARK_PORT);
-		shooterVertRotSpark = new Talon(RobotMap.Manipulator.SHOOTER_VERTICAL_ROTATION_SPARK_PORT);
+		shooterVertRotServo = new Servo(RobotMap.Manipulator.SHOOTER_VERTICAL_ROTATION_SPARK_PORT);
 		shooterRightLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_R_LIMIT_SWITCH_PORT);
 		shooterLeftLimitSwitch = new DigitalInput(RobotMap.Manipulator.SHOOTER_L_LIMIT_SWITCH_PORT);
     }
 
     public void initDefaultCommand() {
+    	//setDefaultCommand(new ServoManualRotationCommand());
     }
 
     /**
@@ -213,5 +217,13 @@ public class Manipulator extends Subsystem {
     
     public void setHorizRotSpeed(double speed) {
     	shooterHorizRotSpark.set(HORIZ_ROT_SCALE*speed);
+    }
+    
+    public double getVerticalRotation() {
+    	return shooterVertRotServo.get();
+    }
+    
+    public void setVerticalRotation(double speed) {
+    	shooterVertRotServo.set(speed);
     }
 }

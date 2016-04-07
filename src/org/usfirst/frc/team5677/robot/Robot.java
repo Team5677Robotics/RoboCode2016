@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5677.robot;
 
+import org.usfirst.frc.team5677.robot.commands.AutonomousCommand;
 import org.usfirst.frc.team5677.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5677.robot.subsystems.Manipulator;
 
@@ -34,6 +35,9 @@ public class Robot extends IterativeRobot {
     	// set any cam parameters, then start capture
     	cam.startAutomaticCapture("cam0");
     	
+    	SmartDashboard.putDouble("Servo speed", 0);
+    	SmartDashboard.putDouble("Auton time", 7.0);
+    	SmartDashboard.putBoolean("Auton", true);
     	OI.initialize();
     	DriveTrain.initialize();
     	Manipulator.initialize();
@@ -60,7 +64,9 @@ public class Robot extends IterativeRobot {
      * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
      * or additional comparisons to the switch structure below with additional strings & commands.
      */
-    public void autonomousInit() {        
+    public void autonomousInit() {
+    	if (SmartDashboard.getBoolean("Auton"))
+    		(new AutonomousCommand()).start();
     }
 
     /**
