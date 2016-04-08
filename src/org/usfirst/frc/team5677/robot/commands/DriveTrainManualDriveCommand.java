@@ -26,7 +26,7 @@ public class DriveTrainManualDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	driveTrain.setSpeed(OI.getGamepad().getRawAxis(1), OI.getGamepad().getRawAxis(3));
+    	driveTrain.setSpeed(OI.getLeftJoystick().getRawAxis(1), OI.getRightJoystick().getRawAxis(1));
     }
 
     // Make this return true when this Command no longer needs to run execute()

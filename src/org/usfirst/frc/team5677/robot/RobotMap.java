@@ -18,7 +18,7 @@ public class RobotMap {
      * Contains constants used by OI instance.
      */
     public class OI {
-       public static final int GAMEPAD_PORT = 0;
+       public static final int GAMEPAD_PORT = 3;
     }
         
     /*

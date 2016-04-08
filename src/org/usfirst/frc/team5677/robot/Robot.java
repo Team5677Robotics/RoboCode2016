@@ -36,8 +36,9 @@ public class Robot extends IterativeRobot {
     	cam.startAutomaticCapture("cam0");
     	
     	SmartDashboard.putDouble("Servo speed", 0);
-    	SmartDashboard.putDouble("Auton time", 7.0);
+    	SmartDashboard.putDouble("Auton time", 4.0);
     	SmartDashboard.putBoolean("Auton", true);
+    	SmartDashboard.putBoolean("Manual drive scaling", false);
     	OI.initialize();
     	DriveTrain.initialize();
     	Manipulator.initialize();
